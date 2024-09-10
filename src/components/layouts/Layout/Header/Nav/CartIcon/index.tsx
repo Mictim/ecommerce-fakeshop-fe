@@ -16,7 +16,7 @@ const CartIcon = () => {
     ? `${styles.bump} ${styles.cart_icon}`
     : styles.cart_icon;
 
-  console.log(totalItems, status);
+  // console.log(totalItems, status);
   const totalQuantity = totalItems;
   const amountStyles =
     totalQuantity === 0 ? styles.no_items : styles.cart_amount;

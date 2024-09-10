@@ -12,6 +12,7 @@ import Spinner from "../../components/components/Spinner";
 
 const Product = () => {
   const { product, isLoading } = useAppSelector((state) => state.product);
+  const [size, setSize] = useState(sizeData[0]);
   const dispatch = useAppDispatch();
   const { id } = useParams();
 
@@ -29,6 +30,7 @@ const Product = () => {
         image: product.image,
         description: product.description,
         category: product.category,
+        size: size
       },
     };
     dispatch(addToCart(cartProduct)).then(() => {
@@ -54,7 +56,10 @@ const Product = () => {
         <p className={styles.section_title_bottom}>
           {route?.map((item, index) => {
             return (
-              <Link to={item.route}>
+              <Link to={item.route}
+                data-testid={`${item.name.toLocaleLowerCase().replace(' ', "-")}-btn`}
+                key={`${item.name.toLocaleLowerCase().replace(' ', "-")}-${index}`}
+              >
                 {item.name}
                 {index < 2 && <span>&nbsp;&gt;&nbsp;</span>}
               </Link>
@@ -65,10 +70,10 @@ const Product = () => {
           <div className={styles.productImageContainer}>
             <img src={product.image} className={styles.image}></img>
           </div>
-          <div className={styles.productDetailsContainer}>
+          <div className={styles.productDetailsContainer} data-testid="product-details-container">
             <div className={styles.titleContainer}>
-              <div className={styles.title}>{product.title}</div>
-              <div className={styles.subHeading}>{product.description}</div>
+              <div className={styles.title} data-testid="product-details-title">{product.title}</div>
+              <div className={styles.subHeading} data-testid="product-details-desc">{product.description}</div>
             </div>
             <div className={styles.sizeContainer}>
               <div className={styles.title}>Size:</div>
@@ -76,8 +81,8 @@ const Product = () => {
                 <div className={styles.buttonContainer}>
                   {sizeData?.map((item) => {
                     return (
-                      <div className={styles.button}>
-                        <input type="radio" id={item} name="category" />
+                      <div className={styles.button} key={item}>
+                        <input type="radio" id={item} name="size" data-testid={`${item.toLocaleLowerCase()}-size-btn`} value={item} onChange={e => setSize(e.target.value)}/>
                         <label className="btn btn-default" htmlFor={item}>
                           {item}
                         </label>
@@ -89,12 +94,13 @@ const Product = () => {
             </div>
             <div className={styles.priceContainer}>
               <div className={styles.title}>Price:</div>
-              <div className={styles.price}>${product.price}</div>
+              <div className={styles.price}>$<span data-testid="product-details-price">{product.price}</span></div>
             </div>
             <div className={styles.addToCartContainer}>
               <div
                 className={styles.addToCart}
                 onClick={() => addToCartHandler()}
+                data-testid="add-to-cart-btn"
               >
                 {isLoadingProduct ? (
                   <Spinner className={"addToCartSm"} />
@@ -102,7 +108,7 @@ const Product = () => {
                   "Add to Cart"
                 )}
               </div>
-              <Link to={`/catalog/All`} className={styles.continueShopping}>
+              <Link to={`/catalog/All`} className={styles.continueShopping} data-testid="continue-shopping-btn">
                 Continue Shopping
               </Link>
             </div>

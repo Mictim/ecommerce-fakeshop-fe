@@ -9,6 +9,7 @@ interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
   onClick?: () => void;
   disabled?: boolean;
+  dataTestId?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -18,6 +19,7 @@ const Button: React.FC<ButtonProps> = ({
   type,
   onClick,
   disabled,
+  dataTestId
 }) => {
   if (to) {
     return (
@@ -25,6 +27,7 @@ const Button: React.FC<ButtonProps> = ({
         to={to}
         className={`${styles.button} ${className}`}
         onClick={onClick}
+        data-testid={dataTestId}
       >
         {children}
       </Link>
@@ -37,6 +40,7 @@ const Button: React.FC<ButtonProps> = ({
       className={`${styles.button} ${className}`}
       onClick={onClick}
       disabled={disabled}
+      data-testid={dataTestId}
     >
       {children}
     </button>

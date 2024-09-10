@@ -47,14 +47,14 @@ const Navbar: React.FC<NavBarProps> = ({ handleShow }) => {
   return (
     <nav className={navStyles}>
       <div className={styles.container_bottom}>
-        <Link to="/" className={styles.title}>
+        <Link to="/" className={styles.title} data-testid='home-btn'>
           Flowy Cart
         </Link>
         <ul className={styles.links}>
-          {navData.map((option) => {
+          {navData.map((option, index) => {
             return (
-              <li>
-                <NavLink to={`/catalog/${option.name}`} className={styles.link}>
+              <li key={`${option.name}-${index}`}>
+                <NavLink to={`/catalog/${option.name}`} className={styles.link} data-testid={`${option.name.toLocaleLowerCase()}-btn`}>
                   {option.name}
                 </NavLink>
               </li>
@@ -63,17 +63,17 @@ const Navbar: React.FC<NavBarProps> = ({ handleShow }) => {
         </ul>
         <ul className={styles.icons_menu}>
           <li>
-            <NavLink to={"/"} className={styles.link}>
+            <NavLink to={"/"} className={styles.link} data-testid="search-btn">
               <RiSearch2Line />
             </NavLink>
           </li>
           <li>
-            <div className={styles.link} onClick={handleShow}>
+            <div className={styles.link} onClick={handleShow} data-testid='cart-btn'>
               <CartIcon />
             </div>
           </li>
           <li>
-            <NavLink to={`/login`} className={styles.link}>
+            <NavLink to={`/login`} className={styles.link} data-testid='profile-btn'>
               <RiUserLine />
             </NavLink>
           </li>

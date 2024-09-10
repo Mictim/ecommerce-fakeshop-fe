@@ -29,7 +29,7 @@ const CartModal: React.FC<CartModalProps> = ({ show, setShow }) => {
   };
 
   return (
-    <Modal isOpen={show} onClose={handleClose} isRight={isBigScreen}>
+    <Modal isOpen={show} onClose={handleClose} isRight={isBigScreen} data-testid="cart-modal">
       <div className={styles.container}>
         <div className={styles.content}>
           {cartItems.map((item: CartItem) => (
@@ -46,7 +46,7 @@ const CartModal: React.FC<CartModalProps> = ({ show, setShow }) => {
               <p>
                 <span>Total</span>
               </p>
-              <p>
+              <p data-testid="total-price">
                 <span>{totalPrice.toFixed(2)}</span>
               </p>
             </div>
@@ -56,6 +56,7 @@ const CartModal: React.FC<CartModalProps> = ({ show, setShow }) => {
                   className={`${styles.button} ${styles.cart_button}`}
                   to="/cart"
                   onClick={handleClose}
+                  dataTestId='go-to-cart-btn'
                 >
                   Your cart
                 </Button>
@@ -63,6 +64,7 @@ const CartModal: React.FC<CartModalProps> = ({ show, setShow }) => {
                   className={`${styles.button} ${styles.checkout_button}`}
                   to="/cart"
                   onClick={handleClose}
+                  dataTestId="checkout-btn"
                 >
                   Check out
                 </Button>
@@ -70,6 +72,7 @@ const CartModal: React.FC<CartModalProps> = ({ show, setShow }) => {
               <Button
                 className={`${styles.button} ${styles.close_button}`}
                 onClick={handleClose}
+                dataTestId="back-btn"
               >
                 Go Back
               </Button>

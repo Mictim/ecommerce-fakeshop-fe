@@ -43,15 +43,17 @@ const Cart = () => {
               <div
                 className={styles.emptyCart}
                 onClick={() => dispatch(cartReset())}
+                data-testid="clear-cart-btn"
               >
                 Empty Cart
               </div>
-              {cartItems.map((item) => {
+              {cartItems.map((item, index) => {
                 return (
-                  <div className={styles.cartCardWrapper}>
+                  <div className={styles.cartCardWrapper} data-testid="product-card" key={index}>
                     <Link
                       to={`/products/${item.product.id}`}
                       className={styles.cartCardContainer}
+                      data-testid="go-to-product"
                     >
                       <img
                         src={item.product.image}
@@ -63,9 +65,9 @@ const Cart = () => {
                           <div className={styles.title}>
                             {item.product.title}
                           </div>
-                          <div className={styles.size}>Size: 36</div>
+                          <div className={styles.size}>Size: <span data-testid="product-size">{item.product.size}</span></div>
                           <div className={styles.price}>
-                            $ {item.product.price}
+                            $ <span data-testid="product-price">{item.product.price}</span>
                           </div>
                           <div className={styles.return}>
                             <div className={styles.iconContainer}>
@@ -93,15 +95,17 @@ const Cart = () => {
                           onClick={() =>
                             dispatch(reduceItemFromCart(item.product))
                           }
+                          dataTestId="reduce-product-btn"
                         >
                           -
                         </Button>
-                        <div className={styles.counter}>{item.quantity}</div>
+                        <div className={styles.counter} data-testid="product-quantity">{item.quantity}</div>
                         <Button
                           className={styles.button}
                           onClick={() =>
                             dispatch(incrementItemFromCart(item.product))
                           }
+                          dataTestId="add-product-btn"
                         >
                           +
                         </Button>
@@ -111,6 +115,7 @@ const Cart = () => {
                         onClick={() =>
                           dispatch(removeItemFromCart(item.product.id))
                         }
+                        dataTestId="remove-product-btn"
                       >
                         <MdDelete className={styles.icon} />
                       </Button>
@@ -127,33 +132,33 @@ const Cart = () => {
                     <BiPurchaseTag className={styles.icon} />
                   </div>
                   <div className={styles.title}>Apply Coupons</div>
-                  <Button className={styles.button}>Apply</Button>
+                  <Button className={styles.button} dataTestId="apply-coupon-btn">Apply</Button>
                 </div>
               </div>
               <div className={styles.priceDetails}>
                 <div className={styles.title}>Price Details</div>
                 <div className={styles.priceContent}>
                   <div className={styles.title}>Total MRP</div>
-                  <div className={styles.price}>{totalPrice.toFixed(2)}</div>
+                  <div className={styles.price} data-testid="total-mrp">{totalPrice.toFixed(2)}</div>
                 </div>
                 <div className={styles.priceContent}>
                   <div className={styles.title}>Platform Fee</div>
-                  <div className={styles.price}>FREE</div>
+                  <div className={styles.price} data-testid="platform-fee">FREE</div>
                 </div>
                 <div className={styles.priceContent}>
                   <div className={styles.title}>Shipping Fee</div>
-                  <div className={styles.price}>FREE</div>
+                  <div className={styles.price} data-testid="shipping-fee">FREE</div>
                 </div>
               </div>
               <div className={styles.totalContent}>
                 <div className={styles.title}>Total Amount</div>
-                <div className={styles.price}>{totalPrice.toFixed(2)}</div>
+                <div className={styles.price} data-testid="total-price">{totalPrice.toFixed(2)}</div>
               </div>
-              <Button className={styles.button}>Place Order</Button>
+              <Button className={styles.button} dataTestId="submit-order-btn">Place Order</Button>
             </div>
           </div>
         ) : (
-          <div className={styles.noCartItems}>No Items Here</div>
+          <div className={styles.noCartItems} data-testid="empty-card-msg">No Items Here</div>
         )}
       </div>
     </section>

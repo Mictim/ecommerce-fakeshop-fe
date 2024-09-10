@@ -16,12 +16,12 @@ interface ProductCardProps extends Product {
 
 const ProductCard: FC<ProductCardProps> = ({
   id,
-  key,
   title,
   price,
   category,
   description,
   image,
+  size
 }) => {
   const dispatch = useAppDispatch();
 
@@ -44,6 +44,7 @@ const ProductCard: FC<ProductCardProps> = ({
         image: image,
         description: description,
         category: category,
+        size: size
       },
     };
 
@@ -55,7 +56,8 @@ const ProductCard: FC<ProductCardProps> = ({
   return (
     <motion.div
       id={title}
-      key={key}
+      data-testid="product-card"
+      key={title}
       tabIndex={id}
       whileHover={{ cursor: "pointer" }}
       // onMouseEnter={() => showActionIcons(true)}
@@ -68,7 +70,7 @@ const ProductCard: FC<ProductCardProps> = ({
     >
       <div className={styles.productItem}>
         <div className={styles.productPic}>
-          <Link to={`/products/${String(id)}`}>
+          <Link to={`/products/${String(id)}`} data-testid="product-img-btn">
             <img src={image} alt={title} />
           </Link>
         </div>
@@ -77,21 +79,23 @@ const ProductCard: FC<ProductCardProps> = ({
         <Link
           to={`/products/${String(id)}`}
           className={styles.productDetailsWrapper}
+          data-testid="product-desc-btn"
         >
           <div className={styles.productDetails}>
             <div className={styles.productTitle}>
-              <div>{title}</div>
+              <div data-testid="product-title">{title}</div>
             </div>
-            <div className={styles.productPrice}>{price}$</div>
+            <div className={styles.productPrice}><span data-testid="product-price">{price}</span>$</div>
           </div>
         </Link>
         <motion.div
-          key={key}
+          key={id}
           whileHover={{ zoom: 1.2 }}
           style={{ height: "100%" }}
           onClick={() => addToCartHandler()}
         >
-          <Button className={styles.iconCcontainer}>
+          <Button className={styles.iconCcontainer}
+            dataTestId="add-to-cart-btn">
             {isLoadingProduct && <Spinner className={"addToCart"} />}
             <CgShoppingBag
               className={`${styles.icon} ${

@@ -9,4 +9,5 @@ export interface Product {
     rate?: number;
   };
   title: string;
+  size?: string;
 }

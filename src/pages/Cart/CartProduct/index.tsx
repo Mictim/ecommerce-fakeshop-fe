@@ -29,6 +29,7 @@ const CartProduct: FC<CartProps> = ({ item, onClick }) => {
         to={`/products/${item.product.id}`}
         className={styles.cartCardContainer}
         onClick={onClick}
+        data-testid='return-to-product-btn'
       >
         <div className={styles.cartCardImage}>
           <img src={item.product.image} alt={item.product.title} />
@@ -36,7 +37,7 @@ const CartProduct: FC<CartProps> = ({ item, onClick }) => {
         <div className={styles.cartCardDetails}>
           <div className={styles.cartCardLeft}>
             <div className={styles.title}>{item.product.title}</div>
-            <div className={styles.size}>Size: 36</div>
+            <div className={styles.size}>Size: {item.product.size}</div>
             <div className={styles.price}>$ {item.product.price}</div>
           </div>
         </div>
@@ -47,6 +48,7 @@ const CartProduct: FC<CartProps> = ({ item, onClick }) => {
             className={styles.button}
             // disabled={item.quantity < 2}
             onClick={() => dispatch(reduceItemFromCart(item.product))}
+            dataTestId="reduce-btn"
           >
             -
           </Button>
@@ -54,6 +56,7 @@ const CartProduct: FC<CartProps> = ({ item, onClick }) => {
           <Button
             className={styles.button}
             onClick={() => dispatch(incrementItemFromCart(item.product))}
+            dataTestId="add-btn"
           >
             +
           </Button>
@@ -61,6 +64,7 @@ const CartProduct: FC<CartProps> = ({ item, onClick }) => {
         <Button
           className={styles.cartCardDelete}
           onClick={() => dispatch(removeItemFromCart(item.product.id))}
+          dataTestId="remove-btn"
         >
           <MdDelete className={styles.icon} />
         </Button>

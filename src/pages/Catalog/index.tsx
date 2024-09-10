@@ -50,7 +50,7 @@ const Catalog = () => {
   return (
     <div className={`${styles.container} main-container`}>
       <div className={styles.titleContainer}>
-        <Button className={styles.iconContainer} onClick={() => navigate(-1)}>
+        <Button className={styles.iconContainer} onClick={() => navigate(-1)} data-testid="nav-back-btn">
           <MdArrowBack className={styles.icon} />
         </Button>
         <div className={styles.title}>{convertedString}</div>
@@ -58,6 +58,7 @@ const Catalog = () => {
       <div className={styles.productList}>
         {products?.map((product, index) => {
           return (
+            <div key={index}>
             <ProductCard
               id={product.id}
               key={index}
@@ -66,7 +67,9 @@ const Catalog = () => {
               category={product.category}
               description={product.description}
               image={product.image}
+              size={product.size}
             />
+            </div>
           );
         })}
       </div>
