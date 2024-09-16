@@ -11,7 +11,7 @@ const HeroSection = () => {
     <section className={styles.section}>
       <div className={`${styles.container} main-container`}>
         <div className={styles.content_wrapper}>
-          <header className={styles.header}>
+          <header className={styles.header} data-testid="home-header-txt">
             <h1 className={styles.title} style={{ fontWeight: 1000 }}>
               unleash your Style
             </h1>
@@ -20,7 +20,7 @@ const HeroSection = () => {
             </h1>
           </header>
           <div className={styles.buttons_wrapper}>
-            <Button to="/catalog/All" className={styles.button}>
+            <Button to="/catalog/All" className={styles.button} dataTestId="shop-now-btn">
               Shop Now
             </Button>
           </div>

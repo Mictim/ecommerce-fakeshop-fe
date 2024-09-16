@@ -50,10 +50,10 @@ const Catalog = () => {
   return (
     <div className={`${styles.container} main-container`}>
       <div className={styles.titleContainer}>
-        <Button className={styles.iconContainer} onClick={() => navigate(-1)} data-testid="nav-back-btn">
+        <Button className={styles.iconContainer} onClick={() => navigate(-1)} dataTestId="nav-back-btn">
           <MdArrowBack className={styles.icon} />
         </Button>
-        <div className={styles.title}>{convertedString}</div>
+        <div className={styles.title} data-testid="page-name">{convertedString}</div>
       </div>
       <div className={styles.productList}>
         {products?.map((product, index) => {

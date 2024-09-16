@@ -1,0 +1,110 @@
+import devices, { defineConfig } from '@playwright/test';
+import dotenv from 'dotenv';
+/**
+ * Read environment variables from file.
+ * https://github.com/motdotla/dotenv
+ */
+dotenv.config();
+
+/**
+ * See https://playwright.dev/docs/test-configuration.
+ */
+export default defineConfig({
+  testDir: './tests/scenarios',
+  /* Run tests in files in parallel */
+  fullyParallel: true,
+  /* Fail the build on CI if you accidentally left test.only in the source code. */
+  forbidOnly: !!process.env.CI,
+  /* Retry on CI only */
+  retries: process.env.CI ? 1 : 0,
+  /* Opt out of parallel tests on CI. */
+  workers: process.env.CI ? '100%' : '50%',
+  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
+  reporter: [
+    ['line'],
+    ['html'],
+    // [
+    //   'playwright-xray-mti',
+    //   {
+    //     jira: {
+    //       url: 'https://jira.telekom.de/',
+    //       type: 'server',
+    //       apiVersion: '1.0',
+    //       suffix: 'rest/raven/1.0'
+    //     },
+    //     server: {
+    //       token: '',
+    //       username: process.env.JIRA_USER,
+    //       password: process.env.JIRA_PASS
+    //     },
+    //     projectKey: process.env.JIRA_PROJECT,
+    //     testPlan: process.env.JIRA_TEST_PLAN,
+    //     debug: false,
+    //     testExecution: process.env.JIRA_TEST_EXEC,
+    //     summary: `[${process.env.JIRA_PROJECT}][LEX DEMO][${new Date().toLocaleString('en-US', { timeZone: 'Europe/Berlin' })}] - Automated`
+    //   },
+    // ],
+  ],
+  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  use: {
+    /* Base URL to use in actions like `await page.goto('/')`. */
+    baseURL: 'http://localhost:5173',
+    proxy: {
+      server: "http://sia-lb.telekom.de:8080",
+      bypass: "localhost, 127.0.0.1"
+    },
+    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    trace: 'on',
+    screenshot: 'on',
+    viewport: {width: 1920, height: 1080}
+  },
+
+  /* Configure projects for major browsers */
+  projects: [
+    {
+      name: 'chromium',
+      use: {
+        ...devices['Desktop Chrome']
+      },
+    },
+
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
+
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
+
+    /* Test against mobile viewports. */
+    // {
+    //   name: 'Mobile Chrome',
+    //   use: { ...devices['Pixel 5'] },
+    // },
+    // {
+    //   name: 'Mobile Safari',
+    //   use: { ...devices['iPhone 12'] },
+    // },
+
+    /* Test against branded browsers. */
+    // {
+    //   name: 'Microsoft Edge',
+    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
+    // },
+    // {
+    //   name: 'Google Chrome',
+    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+    // },
+  ],
+
+  /* Run your local dev server before starting the tests */
+  webServer: {
+    command: 'npm run dev',
+    //url: "http://127.0.0.1",
+    timeout: 2 * 60 * 1000,
+    port: 5173,
+    reuseExistingServer: true,
+  },
+});

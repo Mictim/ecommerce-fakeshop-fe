@@ -53,7 +53,7 @@ const Product = () => {
   return (
     <section className={styles.section}>
       <div className={`${styles.container} main-container`}>
-        <p className={styles.section_title_bottom}>
+        <p className={styles.section_title_bottom} data-testid="breadcrumb">
           {route?.map((item, index) => {
             return (
               <Link to={item.route}
