@@ -22,28 +22,7 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ['line'],
-    ['html'],
-    // [
-    //   'playwright-xray-mti',
-    //   {
-    //     jira: {
-    //       url: 'https://jira.telekom.de/',
-    //       type: 'server',
-    //       apiVersion: '1.0',
-    //       suffix: 'rest/raven/1.0'
-    //     },
-    //     server: {
-    //       token: '',
-    //       username: process.env.JIRA_USER,
-    //       password: process.env.JIRA_PASS
-    //     },
-    //     projectKey: process.env.JIRA_PROJECT,
-    //     testPlan: process.env.JIRA_TEST_PLAN,
-    //     debug: false,
-    //     testExecution: process.env.JIRA_TEST_EXEC,
-    //     summary: `[${process.env.JIRA_PROJECT}][LEX DEMO][${new Date().toLocaleString('en-US', { timeZone: 'Europe/Berlin' })}] - Automated`
-    //   },
-    // ],
+    ['html']
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
