@@ -49,10 +49,6 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'http://localhost:5173',
-    proxy: {
-      server: "http://sia-lb.telekom.de:8080",
-      bypass: "localhost, 127.0.0.1"
-    },
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on',
     screenshot: 'on',
