@@ -11,6 +11,8 @@ export class HeaderComponent extends BasePage {
     private womenPageBtn = this.page.getByTestId('women-btn');
     private electronicPageBtn = this.page.getByTestId('electronics-btn');
     private jeweleryPageBtn = this.page.getByTestId('jewelery-btn');
+    private cartBtn = this.page.getByTestId('cart-btn');
+    private profileBtn = this.page.getByTestId('profile-btn');
 
     constructor(page: Page) {
         super(page);
@@ -54,6 +56,16 @@ export class HeaderComponent extends BasePage {
     async openJeweleryPage(): Promise<Product[]> {
         const products = await this.getResponse<Product[]>("**/products/category/jewelery", this.jeweleryPageBtn);  
         return products;
+    }
+
+    @step('Open Cart Page')
+    async openCartPage(): Promise<void> {
+        await this.cartBtn.click();
+    }
+
+    @step('Open Profile Page')
+    async openProfilePage(): Promise<void> {
+        await this.profileBtn.click();
     }
     
 }

@@ -14,7 +14,7 @@ export class HomePage extends BasePage {
     @step('Validate Home page is opened')
     async isPageOpened() {
         expect.soft(await this.pageHeader, 'Home Page Header is visible').toBeVisible();
-        expect.soft(await this.pageHeader).toHaveText('unleash your Style find your Flow.')
+        expect.soft(await this.pageHeader).toHaveText('unleash your Stylefind your Flow.')
     }
 
     @step('Perform Shop Now')

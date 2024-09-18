@@ -1,4 +1,5 @@
 import { Locator, Page } from "@playwright/test";
+import { HeaderComponent } from "./header.component";
 
 
 export abstract class BasePage {

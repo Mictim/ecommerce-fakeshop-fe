@@ -11,6 +11,6 @@ test('test', async ({ page, baseURL }) => {
 
 fixtureTest('test with fixture', async({ app }) => {
   await app.home.isPageOpened();
-  await app.header.openAllPage();
-  await app.all.isPageOpened();
+  await app.header.openProfilePage();
+  await app.profile.isPageOpened();
 })

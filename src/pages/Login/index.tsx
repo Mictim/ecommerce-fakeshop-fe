@@ -40,9 +40,9 @@ const LoginPage = () => {
 
   return (
     <section className={styles.section}>
-      <div className={`${styles.container} main-container`}>
+      <div className={`${styles.container} main-container`} data-testid="profile-container">
         {user !== null ? (
-          <div className={styles.profile}>
+          <div className={styles.profile} data-testid="profile-section">
             <div className={styles.profileHeader}>
               <div className={styles.profileInfo}>
                 <span className={styles.name}>
@@ -63,17 +63,18 @@ const LoginPage = () => {
               type="button"
               className={styles.logoutBtn}
               onClick={() => logoutHandler()}
+              data-testid='logout-btn'
             >
               Logout
             </button>
           </div>
         ) : (
-          <div className={styles.loginContainer}>
+          <div className={styles.loginContainer} data-testid='login-section'>
             <h2>Login</h2>
             <form action="/login" onSubmit={formSubmitHandler}>
               <div className={styles.formItem}>
                 <div className={styles.formField}>
-                  <input type="text" name="username" placeholder="Username:" />
+                  <input type="text" name="username" placeholder="Username:" data-testid="username-input"/>
                 </div>
                 <p className={styles.apiSignExample}>
                   demo username: <strong>mor_2314</strong>
@@ -85,6 +86,7 @@ const LoginPage = () => {
                     type="password"
                     name="password"
                     placeholder="Password:"
+                    data-testid="password-input"
                   />
                 </div>
                 <p className={styles.apiSignExample}>
@@ -92,7 +94,7 @@ const LoginPage = () => {
                 </p>
               </div>
               <div className={styles.formSubmit}>
-                <button type="submit">Sign In</button>
+                <button type="submit" data-testid="submit-btn">Sign In</button>
               </div>
             </form>
           </div>
